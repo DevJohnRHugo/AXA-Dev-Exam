@@ -1,0 +1,64 @@
+<div id="signin-container">
+  <div class="login" style="display:flex; justify-content:center;">
+    <div class="login-screen">
+      <div class="app-title">
+        <h3><i class="fa fa-list-alt pr-2" aria-hidden="true"></i>Applicant registration</h3>
+      </div>
+
+      <div class="login-form">       
+        <form [formGroup]="form">
+          <!--<div class="form-group">-->
+          <!--<input type="text" hidden="hidden" formControlName="Id" />-->
+          <!--<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your name" formControlName="name">
+  </div>-->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Your name" aria-label="Username" aria-describedby="basic-addon1" formControlName="name">
+          </div>
+          <!--<div class="form-group">
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" formControlName="email">
+  </div>-->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="email@example.com" aria-label="Username" aria-describedby="basic-addon1" formControlName="email">
+          </div>
+          <!--<div class="form-group">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Mobile number" formControlName="mobile">
+  </div>-->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Mobile number" aria-label="Username" aria-describedby="basic-addon1" formControlName="mobile">
+          </div>
+
+          <!--<div class="form-group">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Position applied" formControlName="positionApplied">
+  </div>-->
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Position applied" aria-label="Username" aria-describedby="basic-addon1" formControlName="positionApplied">
+          </div>
+
+          <!--<div class="form-group">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Source" formControlName="source">
+  </div>-->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-external-link-square" aria-hidden="true"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Source" aria-label="Username" aria-describedby="basic-addon1" formControlName="source">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="registerUser()">REGISTER</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
