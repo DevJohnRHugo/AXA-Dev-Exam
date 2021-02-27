@@ -1,4 +1,4 @@
-<div id="signin-container">
+<!--<div id="signin-container">
   <div class="login" style="display:flex; justify-content:center;">
     <div class="login-screen">
       <div class="app-title">
@@ -7,28 +7,21 @@
 
       <div class="login-form">       
         <form [formGroup]="form">
-          <!--<div class="form-group">-->
-          <!--<input type="text" hidden="hidden" formControlName="Id" />-->
-          <!--<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your name" formControlName="name">
-  </div>-->
+        
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
             </div>
             <input type="text" class="form-control" placeholder="Your name" aria-label="Username" aria-describedby="basic-addon1" formControlName="name">
           </div>
-          <!--<div class="form-group">
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" formControlName="email">
-  </div>-->
+       
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
             </div>
             <input type="text" class="form-control" placeholder="email@example.com" aria-label="Username" aria-describedby="basic-addon1" formControlName="email">
           </div>
-          <!--<div class="form-group">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Mobile number" formControlName="mobile">
-  </div>-->
+        
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
@@ -36,9 +29,6 @@
             <input type="text" class="form-control" placeholder="Mobile number" aria-label="Username" aria-describedby="basic-addon1" formControlName="mobile">
           </div>
 
-          <!--<div class="form-group">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Position applied" formControlName="positionApplied">
-  </div>-->
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -47,9 +37,6 @@
             <input type="text" class="form-control" placeholder="Position applied" aria-label="Username" aria-describedby="basic-addon1" formControlName="positionApplied">
           </div>
 
-          <!--<div class="form-group">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Source" formControlName="source">
-  </div>-->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-external-link-square" aria-hidden="true"></i></span>
@@ -61,4 +48,79 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+
+<!--<mat-horizontal-stepper [linear]="isLinear" #stepper>-->
+<mat-horizontal-stepper linear>
+  <mat-step [stepControl]="registrationFormGroup" completed="false">
+    <form [formGroup]="registrationFormGroup" id="formRegister">
+      <ng-template matStepLabel>Registration</ng-template>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Full name" formControlName="name" required>
+        <mat-error *ngIf="registrationFormGroup.get('name').hasError('required')">
+          Field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email"
+               placeholder="Ex. mail@gmail.com" />
+        <mat-error *ngIf="
+   registrationFormGroup.get('email').hasError('email')
+   &&!registrationFormGroup.get('email').hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="registrationFormGroup.get('email').hasError('required')">
+          Field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Mobile number</mat-label>
+        <input matInput #mobile maxlength="11" placeholder="Ex. 09274862199" formControlName="mobile" type="number">
+        <mat-hint align="end">{{mobile.value.length}} / 11</mat-hint>
+        <mat-error *ngIf="registrationFormGroup.get('mobile').hasError('required')">
+          Field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Position applied</mat-label>
+        <input matInput placeholder="Job title/position" formControlName="positionApplied" required>
+        <mat-error *ngIf="registrationFormGroup.get('positionApplied').hasError('required')">
+          Field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Source</mat-label>
+        <input matInput placeholder="Name of agency" formControlName="source" required>
+        <mat-error *ngIf="registrationFormGroup.get('source').hasError('required')">
+          Field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button (click)="registerUser()">Submit</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="uploadResumeFormGroup" label="Upload resume" completed="false">
+    <form [formGroup]="uploadResumeFormGroup">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

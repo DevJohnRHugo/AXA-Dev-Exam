@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule  } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -39,6 +40,12 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatIconModule,
+    MatGridListModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: Home2Component, pathMatch: 'full' },
@@ -51,6 +58,7 @@ import { FooterComponent } from './footer/footer.component';
     ]),
     BrowserAnimationsModule
   ],
+  exports: [MatFormFieldModule, MatInputModule],
   providers: [],
   bootstrap: [AppComponent]
 })
