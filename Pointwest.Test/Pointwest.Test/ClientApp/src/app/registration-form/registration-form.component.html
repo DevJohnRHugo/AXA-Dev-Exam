@@ -5,23 +5,23 @@
         <h3><i class="fa fa-list-alt pr-2" aria-hidden="true"></i>Applicant registration</h3>
       </div>
 
-      <div class="login-form">       
+      <div class="login-form">
         <form [formGroup]="form">
-        
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
             </div>
             <input type="text" class="form-control" placeholder="Your name" aria-label="Username" aria-describedby="basic-addon1" formControlName="name">
           </div>
-       
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
             </div>
             <input type="text" class="form-control" placeholder="email@example.com" aria-label="Username" aria-describedby="basic-addon1" formControlName="email">
           </div>
-        
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
@@ -51,9 +51,9 @@
 </div>-->
 
 <!--<mat-horizontal-stepper [linear]="isLinear" #stepper>-->
-<mat-horizontal-stepper linear>
+  <mat-horizontal-stepper linear>
   <mat-step [stepControl]="registrationFormGroup" completed="false">
-    <form [formGroup]="registrationFormGroup" id="formRegister">
+    <form [formGroup]="registrationFormGroup" id="formRegister" class="step-container-style">
       <ng-template matStepLabel>Registration</ng-template>
       <mat-form-field>
         <mat-label>Name</mat-label>
@@ -97,24 +97,21 @@
           Field is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <div>
-        <button mat-button (click)="registerUser()">Submit</button>
+      <div class="w-100  pt-3">
+        <button mat-raised-button matStepperNext color="primary" (click)="registerUser()" class="w-100">Register</button>
       </div>
     </form>
+
+
   </mat-step>
-  <mat-step [stepControl]="uploadResumeFormGroup" label="Upload resume" completed="false">
-    <form [formGroup]="uploadResumeFormGroup">
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+  <mat-step [stepControl]="uploadResumeFormGroup" label="Upload resume" completed="false">   
+    <app-resume-uploader></app-resume-uploader>
   </mat-step>
+  <mat-step [stepControl]="scheduleFormGroup" completed="false">
+      <ng-template matStepLabel>Book Interview Schedule</ng-template>
+      <app-schedule></app-schedule>    
+  </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>

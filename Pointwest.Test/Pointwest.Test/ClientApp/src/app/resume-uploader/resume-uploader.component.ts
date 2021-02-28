@@ -19,10 +19,10 @@ export class ResumeUploaderComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile);
   }
 
-  uploadResume() { 
-    
+  uploadResume() {     
     this.service.uploadFile(this.selectedFile)
       .subscribe(
         response => {
@@ -30,7 +30,7 @@ export class ResumeUploaderComponent implements OnInit {
 
           if (response.isSuccess) {
             this.toastrService.success(responseMessage.Message, "Success");
-            this.route.navigate(['/applicant/schedule']);
+            //this.route.navigate(['/applicant/schedule']);
           }
           else {
             this.toastrService.error(responseMessage.Message, "Error");

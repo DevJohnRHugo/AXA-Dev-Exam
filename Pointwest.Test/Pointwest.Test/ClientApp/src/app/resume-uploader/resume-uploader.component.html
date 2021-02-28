@@ -1,14 +1,14 @@
-<div id="signin-container">
+<!--<div id="signin-container">
   <div class="login" style="display:flex; justify-content:center;">
     <div class="login-screen">
       <div class="app-title">
         <h3><i class="fa fa-cloud-upload pr-2" aria-hidden="true"></i>Resume uploader</h3>
       </div>
 
-      <div class="login-form">
-        <!--<input type="file" class="btn btn-primary btn-large btn-block" (change)="onFileSelected($event)" />
-  <button class="btn btn-primary btn-large btn-block" (click)="uploadResume()">Upload</button>-->
-        <div class="input-group">
+      <div class="login-form">-->
+<!--<input type="file" class="btn btn-primary btn-large btn-block" (change)="onFileSelected($event)" />
+<button class="btn btn-primary btn-large btn-block" (click)="uploadResume()">Upload</button>-->
+<!--<div class="input-group">
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" (change)="onFileSelected($event)">
             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
@@ -18,6 +18,22 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>-->
+
+<div id="signin-container">
+  <div class="login" style="display:flex; justify-content:center;">
+    <div class="step-container-style">
+        <div class="pt-2">
+          <mat-form-field>
+            <ngx-mat-file-input placeholder="PDF file only" [accept]="'.pdf'" (change)="onFileSelected($event)"></ngx-mat-file-input>
+            <mat-icon matSuffix>attachment</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="w-100">
+          <button mat-raised-button color="primary" (click)="uploadResume()" class="w-100">Upload</button>
+        </div>
     </div>
   </div>
 </div>

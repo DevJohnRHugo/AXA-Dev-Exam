@@ -6,7 +6,11 @@ import { RouterModule } from '@angular/router';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule  } from '@angular/material';
+import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -46,6 +50,14 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
+    MatFileUploadModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule,
+    NgxMaterialTimepickerModule,
+    MaterialFileInputModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: Home2Component, pathMatch: 'full' },

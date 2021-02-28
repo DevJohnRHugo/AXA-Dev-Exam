@@ -33,7 +33,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-#bodyMainContent {
+.mat-stepper-horizontal[_ngcontent-ng-cli-universal-c2] {
   padding: 20px 15% 20px 15%;
 }
 
+div#cdk-step-content-0-0, div#cdk-step-content-0-2, #cdk-step-content-1-0, #cdk-step-content-1-2 {
+  display: flex;
+  justify-content: center;
+}
+
+.step-container-style {
+  padding: 0 100px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  border-radius: 10px;
+}

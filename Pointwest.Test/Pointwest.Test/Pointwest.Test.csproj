@@ -33,6 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\custom-date-format\format-datepicker.ts" />
+    <None Remove="ClientApp\tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="ClientApp\node_modules\%40ng-bootstrap\ng-bootstrap\ng-bootstrap.metadata.json" />
     <Content Include="ClientApp\node_modules\%40ng-bootstrap\ng-bootstrap\package.json" />
     <Content Include="ClientApp\node_modules\animate.css\animate.min.css" />
@@ -1845,6 +1850,8 @@
     <TypeScriptCompile Include="ClientApp\node_modules\ngx-bootstrap\utils\triggers.d.ts" />
     <TypeScriptCompile Include="ClientApp\node_modules\ngx-bootstrap\utils\utils.class.d.ts" />
     <TypeScriptCompile Include="ClientApp\node_modules\ngx-bootstrap\utils\warn-once.d.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\custom-date-format\format-datepicker.ts" />
+    <TypeScriptCompile Include="ClientApp\tsconfig.json" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

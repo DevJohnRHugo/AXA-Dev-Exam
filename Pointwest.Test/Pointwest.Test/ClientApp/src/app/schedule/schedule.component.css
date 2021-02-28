@@ -11,11 +11,11 @@
   position: fixed;
   padding: 0;
   margin: 0;
-  /*top: 0;*/
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /*background-image: linear-gradient(to left, lightgreen, green);*/
+  background-image: linear-gradient(to left, lightgreen, green);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +45,7 @@ h3 {
 }
 
   .login:hover {
-    /*margin: auto;*/
+    margin: auto;
     width: fit-content;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 1);
@@ -53,9 +53,9 @@ h3 {
 
 .login-screen {
   background-color: #FFF;
-  /*padding: 20px;*/
-  /*border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;*/
+  padding: 20px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   border-radius: 5px;
 }
 
@@ -113,10 +113,18 @@ button.calendar, button.calendar:active {
   color: #495057 !important;
 }
 
-#signin-container > div > div > div.login-form.row > div:nth-child(1) > div{
+.datePicker-top-margin{
     margin-top: 37px;
 }
 
 #signin-container > div > div > div.login-form.row > div:nth-child(2){
     padding-left: 80px;
+}
+
+mat-grid-tile {
+  background: lightblue;
+}
+
+mat-datepicker-toggle.mat-datepicker-toggle{
+    font-size: 24px;
 }
