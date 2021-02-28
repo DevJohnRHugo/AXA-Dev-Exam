@@ -47,3 +47,8 @@ div#cdk-step-content-0-0, div#cdk-step-content-0-2, #cdk-step-content-1-0, #cdk-
   border: 1px solid rgba(0, 0, 0, 0.30);
   border-radius: 10px;
 }
+
+mat-form-field {
+  width: 300px;
+}
+

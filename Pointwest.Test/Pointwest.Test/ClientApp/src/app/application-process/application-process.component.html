@@ -1,0 +1,27 @@
+<!--<mat-horizontal-stepper [linear]="isLinear" #stepper>-->
+<mat-horizontal-stepper linear>
+
+  <mat-step [stepControl]="registrationFormGroup" [completed]="isRegistrationSuccess">
+    <ng-template matStepLabel>Registration</ng-template>
+    <registration-form></registration-form>
+  </mat-step>
+
+  <mat-step [stepControl]="uploadResumeFormGroup" label="Upload resume" [completed]="isUploadingSuccess">
+    <app-resume-uploader></app-resume-uploader>
+  </mat-step>
+
+  <mat-step [stepControl]="scheduleFormGroup" [completed]="isScheduleSuccess">
+    <ng-template matStepLabel>Book Interview Schedule</ng-template>
+    <app-schedule></app-schedule>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+
+</mat-horizontal-stepper>

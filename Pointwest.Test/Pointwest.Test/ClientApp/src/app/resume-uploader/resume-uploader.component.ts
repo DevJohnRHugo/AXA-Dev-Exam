@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { RegistrationFormComponent } from '../registration-form/registration-form.component';
+import { ApplicationProcessComponent } from '../application-process/application-process.component';
 import { ApplicationService } from '../services/application.service';
 
 @Component({
@@ -11,8 +10,9 @@ import { ApplicationService } from '../services/application.service';
 })
 export class ResumeUploaderComponent implements OnInit {
   selectedFile = null;
+  isUploadingSuccess: boolean;
 
-  constructor(private service: ApplicationService, private route: Router, private toastrService: ToastrService) { }
+  constructor(private service: ApplicationService, private applicationProcess: ApplicationProcessComponent, private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -30,10 +30,13 @@ export class ResumeUploaderComponent implements OnInit {
 
           if (response.isSuccess) {
             this.toastrService.success(responseMessage.Message, "Success");
-            //this.route.navigate(['/applicant/schedule']);
+            this.applicationProcess.isUploadingSuccess = true;
+            this.isUploadingSuccess = true;
           }
           else {
             this.toastrService.error(responseMessage.Message, "Error");
+            this.applicationProcess.isUploadingSuccess = true;
+            this.isUploadingSuccess = true;
           }
           
         }, error => {

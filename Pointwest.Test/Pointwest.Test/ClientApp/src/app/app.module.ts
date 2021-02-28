@@ -22,6 +22,7 @@ import { ResumeUploaderComponent } from './resume-uploader/resume-uploader.compo
 import { Home2Component } from './home2/home2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { FooterComponent } from './footer/footer.component';
+import { ApplicationProcessComponent } from './application-process/application-process.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FooterComponent } from './footer/footer.component';
     ResumeUploaderComponent,
     Home2Component,
     ScheduleComponent,
-    FooterComponent
+    FooterComponent,
+    ApplicationProcessComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -64,6 +66,7 @@ import { FooterComponent } from './footer/footer.component';
       //{ path: 'home', component: Home2Component },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'application/get-started', component: ApplicationProcessComponent },
       { path: 'applicant/register', component: RegistrationFormComponent },
       { path: 'applicant/file-upload', component: ResumeUploaderComponent },
       { path: 'applicant/schedule', component: ScheduleComponent },
@@ -71,7 +74,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule
   ],
   exports: [MatFormFieldModule, MatInputModule],
-  providers: [],
+  providers: [ApplicationProcessComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
