@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
@@ -24,6 +24,8 @@ import { Home2Component } from './home2/home2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { FooterComponent } from './footer/footer.component';
 import { ApplicationProcessComponent } from './application-process/application-process.component';
+import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { ApplicationProcessComponent } from './application-process/application-p
     Home2Component,
     ScheduleComponent,
     FooterComponent,
-    ApplicationProcessComponent
+    ApplicationProcessComponent,
+    ProgressSpinnerComponent,
+    ThankYouComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -62,6 +66,7 @@ import { ApplicationProcessComponent } from './application-process/application-p
     NgxMaterialTimepickerModule,
     MaterialFileInputModule,
     ParticlesModule,
+    MatProgressSpinnerModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: Home2Component, pathMatch: 'full' },

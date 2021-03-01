@@ -25,6 +25,7 @@ export class ScheduleComponent implements OnInit {
   bookScheduleValues: any = null;
   events: string[] = [];
   isScheduleSuccess: boolean;
+  isShowSpinner: boolean;
 
   constructor(private service: ApplicationService, private applicationProcess: ApplicationProcessComponent, private calendar: NgbCalendar, private toastrService: ToastrService) { }
 
@@ -32,23 +33,31 @@ export class ScheduleComponent implements OnInit {
 
   }
 
-  bookSchedule() {    
+  bookSchedule() {
+    this.isShowSpinner = true;
     this.bookScheduleValues = {
       "ProposedDate": this.dateValue,
       "ProposedTime": this.timeValue
     }
+
     this.service.scheduleInterview(this.bookScheduleValues)
       .subscribe(
         response => {
           const responseMessage = JSON.parse(response.message);
 
           if (response.isSuccess) {
+            this.isShowSpinner = false;
+
             this.toastrService.success(responseMessage.Message, "Success");
+
             this.applicationProcess.isScheduleSuccess = true;
             this.isScheduleSuccess = true;
           }
           else {
+            this.isShowSpinner = false;
+
             this.toastrService.info(responseMessage.Message, "Info");
+
             this.applicationProcess.isScheduleSuccess = true;
             this.isScheduleSuccess = true;
           }
@@ -56,12 +65,12 @@ export class ScheduleComponent implements OnInit {
         }, error => {
           const parseJson = JSON.stringify(error.error)
           const errorResponse = JSON.parse(parseJson);
+          this.isShowSpinner = false;
 
           this.toastrService.error(errorResponse.message, "Error");
         });
   }
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    //this.events.push(`${type}: ${event.value}`);
     this.dateValue = moment(event.value).format('YYYY-MM-DD');
     this.timeValue = moment(event.value).format('hmmA');
   }

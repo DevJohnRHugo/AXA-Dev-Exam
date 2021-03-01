@@ -1,16 +1,18 @@
 <div id="signin-container">
   <div class="login" style="display:flex; justify-content:center;">
     <div class="step-container-style">
-        <div class="pt-2">
-          <mat-form-field>
-            <ngx-mat-file-input placeholder="PDF file only" [accept]="'.pdf'" (change)="onFileSelected($event)"></ngx-mat-file-input>
-            <mat-icon matSuffix>attachment</mat-icon>
-          </mat-form-field>
-        </div>
-        <div class="w-100">
-          <button mat-raised-button (click)="uploadResume()" class="w-100 btn-process" [hidden]="isUploadingSuccess">UPLOAD</button>
-          <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isUploadingSuccess">NEXT</button>
-        </div>
+      <div class="pt-2">
+        <mat-form-field>
+          <ngx-mat-file-input placeholder="PDF file only" [accept]="'.pdf'" (change)="onFileSelected($event)"></ngx-mat-file-input>
+          <mat-icon matSuffix>attachment</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="w-100">
+        <button mat-raised-button (click)="uploadResume()" class="w-100 btn-process" [hidden]="isUploadingSuccess">UPLOAD</button>
+        <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isUploadingSuccess">NEXT</button>
+      </div>
     </div>
   </div>
 </div>
+
+<app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>

@@ -44,8 +44,10 @@
           Field is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <div class="w-100  pt-3">
+      <div class="w-100 pt-3">
         <button mat-raised-button (click)="registerUser()" class="w-100 btn-process" [hidden]="isRegistrationSuccess">REGISTER</button>
         <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isRegistrationSuccess">NEXT</button>
       </div>
     </form>
+
+    <app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>

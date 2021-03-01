@@ -13,6 +13,7 @@ export class RegistrationFormComponent implements OnInit {
   isLinear = false;
   registrationFormGroup: FormGroup;
   isRegistrationSuccess: boolean;
+  isShowSpinner: boolean;
 
   constructor(private service: ApplicationService, private applicationProcess: ApplicationProcessComponent, private toastrService: ToastrService, private _formBuilder: FormBuilder) {
 
@@ -30,25 +31,35 @@ export class RegistrationFormComponent implements OnInit {
 
   registerUser() {
     let mobile = this.registrationFormGroup.controls["mobile"].value as number;
+
     this.registrationFormGroup.controls["mobile"].setValue(`0${mobile.toString()}`);
+    this.isShowSpinner = true;
+
     this.service.registerUser(this.registrationFormGroup.value)
       .subscribe(
         response => {
           const responseMessage = JSON.parse(response.message);
 
           if (response.isSuccess) {
+            this.isShowSpinner = false;
+
             this.toastrService.success(responseMessage.Message, "Success");
+
             this.applicationProcess.isRegistrationSuccess = true;
             this.isRegistrationSuccess = true;
           }
-          else {        
+          else {
+            this.isShowSpinner = false;
+
             this.toastrService.info(responseMessage.Message, "Info");
+
             this.applicationProcess.isRegistrationSuccess = true;
             this.isRegistrationSuccess = true;
           }
         }, error => {
           const parseJson = JSON.stringify(error.error)
           const errorResponse = JSON.parse(parseJson);
+          this.isShowSpinner = false;
 
           this.toastrService.error(errorResponse.message, "Error");
         });

@@ -12,3 +12,5 @@
   <button mat-raised-button class="col-md-12 btn-process" (click)="bookSchedule()" [hidden]="isScheduleSuccess">BOOK</button>
   <button mat-raised-button color="primary" matStepperNext class="col-md-12" [hidden]="!isScheduleSuccess">FINISHED!</button>
 </div>
+
+<app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>

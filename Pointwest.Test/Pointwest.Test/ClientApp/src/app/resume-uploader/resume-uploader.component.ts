@@ -11,6 +11,7 @@ import { ApplicationService } from '../services/application.service';
 export class ResumeUploaderComponent implements OnInit {
   selectedFile = null;
   isUploadingSuccess: boolean;
+  isShowSpinner: boolean;
 
   constructor(private service: ApplicationService, private applicationProcess: ApplicationProcessComponent, private toastrService: ToastrService) { }
 
@@ -19,22 +20,29 @@ export class ResumeUploaderComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
   }
 
-  uploadResume() {     
+  uploadResume() {
+    this.isShowSpinner = true;
+
     this.service.uploadFile(this.selectedFile)
       .subscribe(
         response => {
           const responseMessage = JSON.parse(response.message)
 
           if (response.isSuccess) {
+            this.isShowSpinner = false;
+
             this.toastrService.success(responseMessage.Message, "Success");
+
             this.applicationProcess.isUploadingSuccess = true;
             this.isUploadingSuccess = true;
           }
           else {
+            this.isShowSpinner = false;
+
             this.toastrService.info(responseMessage.Message, "Info");
+
             this.applicationProcess.isUploadingSuccess = true;
             this.isUploadingSuccess = true;
           }
@@ -42,6 +50,7 @@ export class ResumeUploaderComponent implements OnInit {
         }, error => {
           const parseJson = JSON.stringify(error.error)
           const errorResponse = JSON.parse(parseJson);
+          this.isShowSpinner = false;
 
           this.toastrService.error(errorResponse.message, "Error");
         });

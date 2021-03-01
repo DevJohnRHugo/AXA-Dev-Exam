@@ -36,7 +36,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 20px 15%;
 }
 
-div#cdk-step-content-0-0, div#cdk-step-content-0-2, #cdk-step-content-1-0, #cdk-step-content-1-2 {
+div.mat-horizontal-stepper-content {
   display: flex;
   justify-content: center;
 }
@@ -62,6 +62,18 @@ canvas {
 .btn-process {
   background-color: #f07662;
   color: white;
+}
+
+#getStarted {
+  height: 50px;
+  margin: auto;
+  background-color: #f07662;
+  color: white;
+}
+
+#cdk-step-content-0-0 > registration-form {
+  min-width: 502px;
+  max-width: 502px;
 }
 
 

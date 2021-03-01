@@ -1,4 +1,3 @@
-<!--<mat-horizontal-stepper [linear]="isLinear" #stepper>-->
 <mat-horizontal-stepper linear class="size">
 
   <mat-step [stepControl]="registrationFormGroup" [completed]="isRegistrationSuccess">
@@ -17,11 +16,7 @@
 
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <app-thank-you></app-thank-you>
   </mat-step>
 
 </mat-horizontal-stepper>

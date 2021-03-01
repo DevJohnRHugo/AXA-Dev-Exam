@@ -12,7 +12,7 @@ import { pulse } from 'ng-animate'
 //]);
 
 @Component({
-  selector: 'home2',
+  selector: 'home',
   templateUrl: './home2.component.html',
   styleUrls: ['./home2.component.css'],
   animations: [
