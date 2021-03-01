@@ -41,10 +41,10 @@ export class RegistrationFormComponent implements OnInit {
             this.applicationProcess.isRegistrationSuccess = true;
             this.isRegistrationSuccess = true;
           }
-          else {
+          else {        
+            this.toastrService.info(responseMessage.Message, "Info");
             this.applicationProcess.isRegistrationSuccess = true;
             this.isRegistrationSuccess = true;
-            this.toastrService.error(responseMessage.Message, "Error");
           }
         }, error => {
           const parseJson = JSON.stringify(error.error)

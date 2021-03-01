@@ -48,7 +48,7 @@ export class ScheduleComponent implements OnInit {
             this.isScheduleSuccess = true;
           }
           else {
-            this.toastrService.error(responseMessage.Message, "Error");
+            this.toastrService.info(responseMessage.Message, "Info");
             this.applicationProcess.isScheduleSuccess = true;
             this.isScheduleSuccess = true;
           }

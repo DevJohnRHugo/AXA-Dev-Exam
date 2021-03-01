@@ -34,7 +34,7 @@ export class ResumeUploaderComponent implements OnInit {
             this.isUploadingSuccess = true;
           }
           else {
-            this.toastrService.error(responseMessage.Message, "Error");
+            this.toastrService.info(responseMessage.Message, "Info");
             this.applicationProcess.isUploadingSuccess = true;
             this.isUploadingSuccess = true;
           }
