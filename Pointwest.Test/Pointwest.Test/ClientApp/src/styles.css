@@ -3,7 +3,6 @@
 /* Provide sufficient contrast against white background */
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../vendor/fontawesome/css/font-awesome.min.css";
-@import "../node_modules/animate.css/animate.min.css";
 
 html, body {
   width: 100%;
@@ -33,8 +32,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.mat-stepper-horizontal[_ngcontent-ng-cli-universal-c2] {
-  padding: 20px 15% 20px 15%;
+.size {
+  padding: 20px 15%;
 }
 
 div#cdk-step-content-0-0, div#cdk-step-content-0-2, #cdk-step-content-1-0, #cdk-step-content-1-2 {
@@ -51,4 +50,18 @@ div#cdk-step-content-0-0, div#cdk-step-content-0-2, #cdk-step-content-1-0, #cdk-
 mat-form-field {
   width: 300px;
 }
+
+canvas {
+  display: block;
+  vertical-align: bottom;
+  height: 80vh;
+  width: 100vw;
+  background-attachment: fixed;
+}
+
+.btn-process {
+  background-color: #f07662;
+  color: white;
+}
+
 

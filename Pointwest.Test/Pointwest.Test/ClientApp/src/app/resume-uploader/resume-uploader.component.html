@@ -8,7 +8,7 @@
           </mat-form-field>
         </div>
         <div class="w-100">
-          <button mat-raised-button color="primary" (click)="uploadResume()" class="w-100" [hidden]="isUploadingSuccess">UPLOAD</button>
+          <button mat-raised-button (click)="uploadResume()" class="w-100 btn-process" [hidden]="isUploadingSuccess">UPLOAD</button>
           <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isUploadingSuccess">NEXT</button>
         </div>
     </div>

@@ -1,10 +1,12 @@
-<div id="home-container" class="row h-100">
+<div id="home-container" class="row h-100" style="right:10px;">
   <!--<div id="home-container" class="col-md-5 h-100">-->
-  <div >
-   <!-- <img id="image-home" class="img-fluid" src="assets/images/Best-Open-Source-Online-Exam-Software-List_-Merits-and-Demerits.jpg" />-->
-  </div>
+  <!--<div>-->
+  <!-- <img id="image-home" class="img-fluid" src="assets/images/Best-Open-Source-Online-Exam-Software-List_-Merits-and-Demerits.jpg" />-->
+  <!--</div>-->
   <!--<div id="home-container" class="col-md-7 h-100">-->
   <!--<button class="btn btn-primary">Click here to start Application</button>-->
   <!--<a class="btn btn-primary display-3" [routerLink]="['/applicant/register']">Click here to start Application</a>
-  </div>-->  
+  </div>-->
+  <particles id="particles" [style]="myStyle" [width]="width" [height]="height" [params]="myParams"></particles>
+  <button id="getStarted" [@pulse]="pulse" mat-raised-button ><a class="nav-link text-white" [routerLink]="['/application/get-started']">Get Started</a></button>
 </div>

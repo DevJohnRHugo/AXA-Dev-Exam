@@ -45,7 +45,7 @@
         </mat-error>
       </mat-form-field>
       <div class="w-100  pt-3">
-        <button mat-raised-button color="primary" (click)="registerUser()" class="w-100" [hidden]="isRegistrationSuccess">REGISTER</button>
+        <button mat-raised-button (click)="registerUser()" class="w-100 btn-process" [hidden]="isRegistrationSuccess">REGISTER</button>
         <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isRegistrationSuccess">NEXT</button>
       </div>
     </form>

@@ -18,12 +18,9 @@
   background-attachment: unset;
 }
 
-#image-home{
-    height: 500px;
-    width: 500px;
-    margin-bottom: 10%;
-}
-
-a{
-    font-size: x-large
+#getStarted {
+  height: 50px;
+  margin: auto;
+  background-color: #f07662;
+  color: white;
 }

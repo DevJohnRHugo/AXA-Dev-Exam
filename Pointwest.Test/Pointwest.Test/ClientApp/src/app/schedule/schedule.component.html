@@ -9,6 +9,6 @@
                              [disableMinute]="disableMinute" [hideTime]="hideTime">
     </ngx-mat-datetime-picker>
   </mat-form-field>
-  <button mat-raised-button color="primary" class="col-md-12" (click)="bookSchedule()" [hidden]="isScheduleSuccess">BOOK</button>
+  <button mat-raised-button class="col-md-12 btn-process" (click)="bookSchedule()" [hidden]="isScheduleSuccess">BOOK</button>
   <button mat-raised-button color="primary" matStepperNext class="col-md-12" [hidden]="!isScheduleSuccess">FINISHED!</button>
 </div>
