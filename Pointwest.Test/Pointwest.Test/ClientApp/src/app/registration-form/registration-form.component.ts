@@ -59,8 +59,9 @@ export class RegistrationFormComponent implements OnInit {
           const parseJson = JSON.stringify(error.error)
           const errorResponse = JSON.parse(parseJson);
           this.isShowSpinner = false;
+
           console.log(errorResponse);
-          this.toastrService.error(errorResponse.message, "Error");
+          this.toastrService.error("Please check input values", "Error");
         });
   }
 }

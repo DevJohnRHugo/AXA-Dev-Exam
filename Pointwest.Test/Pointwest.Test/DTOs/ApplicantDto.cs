@@ -1,27 +1,23 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Pointwest.Test.DTOs
+namespace Pointwest.Test.Dtos
 {
     public class ApplicantDto
-    {
-        [StringLength(50)]
-        [Required]
+    {   
+        [Required]    
         public string Name { get; set; }
 
-        [StringLength(50)]
-        [Required]
+        [Required]       
         public string Email { get; set; }
 
-        [StringLength(15)]
-        [MinLength(11)]
         [Required]
+        [MinLength(11)]     
+        [MaxLength(11)] 
         public string Mobile { get; set; }
-
-        [StringLength(50)]
+             
         [Required]
         public string PositionApplied { get; set; }
 
-        [StringLength(50)]
         [Required]
         public string Source { get; set; }
     }

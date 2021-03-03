@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class ApplicationService {
-  // readonly apiUrl: string = 'https://localhost:44356/api/application/';
+  //  readonly apiUrl: string = 'https://localhost:44356/api/application/';
   readonly apiUrl: string = 'https://localhost:5001/api/application/';
     //readonly apiUrl: string = 'https://localhost:4200/api/application/';
   constructor(private http: HttpClient, private toastrService: ToastrService) {

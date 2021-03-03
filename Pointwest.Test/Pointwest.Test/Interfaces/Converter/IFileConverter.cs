@@ -9,6 +9,6 @@ namespace Pointwest.Test.Interfaces.Converter
 {
     public interface IFileConverter
     {
-        public Task<string> ToBase64String(IFormFile formFile);
+        Task<string> ToBase64String(IFormFile formFile);
     }
 }

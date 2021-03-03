@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Pointwest.Test.Classes.Utilities.Contants;
+using Pointwest.Test.Dtos;
 using Pointwest.Test.Interfaces.Converter;
 using Pointwest.Test.Interfaces.Http;
 using Pointwest.Test.Model;
@@ -24,15 +25,15 @@ namespace Pointwest.Test.Classes.Helper.Http
         private readonly IFileConverter _fileConverter;
         private HttpResponseMessage _response;
 
-        public ApplicationAXAService(IApiContentProvider apiContentProvider, IHttpClientFactory httpClientFactory, ApplicationViewModel applicationViewModel, ApplicationContantUtilities contantUtilities, IFileConverter fileConverter, FileUpload fileUpload, File file)
+        public ApplicationAXAService(IApiContentProvider apiContentProvider, IHttpClientFactory httpClientFactory, ApplicationViewModel applicationViewModel, ApplicationContantUtilities contantUtilities, IFileConverter fileConverter, FileUploadDto fileUpload, FileDto file)
         {
             _contantUtilities = contantUtilities;
             _httpClientFactory = httpClientFactory;
             _apiContentProvider = apiContentProvider;
             _applicationViewModel = applicationViewModel;
             _fileConverter = fileConverter;
-            _applicationViewModel.FileUpload = fileUpload;
-            _applicationViewModel.FileUpload.File = file;
+            _applicationViewModel.FileUploadDto = fileUpload;
+            _applicationViewModel.FileUploadDto.File = file;
         }
 
         public async Task<TViewModel> PostRegisterAsync<TViewModel, TModel>(TModel model)
@@ -50,6 +51,10 @@ namespace Pointwest.Test.Classes.Helper.Http
             {
                 _applicationViewModel = ViewModelResponse(_applicationViewModel, _response, ex.Message);
             }
+            finally
+            {
+                _response.Dispose();
+            }
 
             return (TViewModel)Convert.ChangeType(_applicationViewModel, typeof(TViewModel));
         }
@@ -60,10 +65,10 @@ namespace Pointwest.Test.Classes.Helper.Http
             {
                 var formFile = model as IFormFile;
 
-                _applicationViewModel.FileUpload.File.Data = await _fileConverter.ToBase64String(formFile);
-                _applicationViewModel.FileUpload.File.Mime = formFile.ContentType;
+                _applicationViewModel.FileUploadDto.File.Data = await _fileConverter.ToBase64String(formFile);
+                _applicationViewModel.FileUploadDto.File.Mime = formFile.ContentType;
 
-                var content = _apiContentProvider.StringContent(_applicationViewModel.FileUpload);
+                var content = _apiContentProvider.StringContent(_applicationViewModel.FileUploadDto);
                 var httpClient = _httpClientFactory.CreateClient("addHeaderApiKey");
 
                 _response = await httpClient.PostAsync(_contantUtilities.UploadResumeEndpoint, content);
@@ -73,6 +78,10 @@ namespace Pointwest.Test.Classes.Helper.Http
             catch (Exception ex)
             {
                 _applicationViewModel = ViewModelResponse(_applicationViewModel, _response, ex.Message);
+            }
+            finally
+            {
+                _response.Dispose();
             }
 
             return (TViewModel)Convert.ChangeType(_applicationViewModel, typeof(TViewModel));
@@ -92,6 +101,10 @@ namespace Pointwest.Test.Classes.Helper.Http
             catch (Exception ex)
             {
                 _applicationViewModel = ViewModelResponse(_applicationViewModel, _response, ex.Message);
+            }
+            finally
+            {
+                _response.Dispose();
             }
 
             return (TViewModel)Convert.ChangeType(_applicationViewModel, typeof(TViewModel));

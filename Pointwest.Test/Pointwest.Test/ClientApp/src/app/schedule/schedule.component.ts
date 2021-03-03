@@ -72,7 +72,8 @@ export class ScheduleComponent implements OnInit {
           const errorResponse = JSON.parse(parseJson);
           this.isShowSpinner = false;
 
-          this.toastrService.error(errorResponse.message, "Error");
+          console.log(errorResponse);
+          this.toastrService.error("Please check input values", "Error");
         });
   }
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {

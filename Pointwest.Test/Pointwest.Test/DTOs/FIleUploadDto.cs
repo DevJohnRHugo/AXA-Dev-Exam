@@ -1,11 +1,14 @@
-namespace Pointwest.Test.DTOs
+using System.ComponentModel.DataAnnotations;
+
+namespace Pointwest.Test.Dtos
 {
-    public class FIleUploadDto
+    public class FileUploadDto
     {
-        public File File { get; set; }
+        [Required]
+        public FileDto File { get; set; }
     }
 
-    public class File
+    public class FileDto
     {
         public string Mime { get; set; }
         public string Data { get; set; }

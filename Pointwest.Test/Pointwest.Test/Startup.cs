@@ -10,6 +10,7 @@ using Pointwest.Test.Classes.Helper.Converter;
 using Pointwest.Test.Classes.Helper.Http;
 using Pointwest.Test.Classes.Utilities.Contants;
 using Pointwest.Test.DatabaseContext;
+using Pointwest.Test.Dtos;
 using Pointwest.Test.Interfaces.Converter;
 using Pointwest.Test.Interfaces.Http;
 using Pointwest.Test.Model;
@@ -32,6 +33,8 @@ namespace Pointwest.Test
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("UserDBConnection")));
 
             services.AddCors(c => c.AddPolicy("TCAPolicy", builder =>
@@ -42,8 +45,10 @@ namespace Pointwest.Test
             }));
            
             services.AddTransient<ApplicationViewModel>();
-            services.AddTransient<FileUpload>();
-            services.AddTransient<File>();
+            //services.AddTransient<FileUpload>();
+            //services.AddTransient<File>();
+            services.AddTransient<FileUploadDto>();
+            services.AddTransient<FileDto>();
             services.AddTransient<IFileConverter, FileConverter>();
             services.AddTransient<IJsonConverter, JsonConverter>();
             services.AddSingleton<ApplicationContantUtilities>();

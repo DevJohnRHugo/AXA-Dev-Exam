@@ -7,6 +7,6 @@ namespace Pointwest.Test.Interfaces.Converter
 {
     public interface IJsonConverter
     {
-        public string ToJsonString<TModel>(TModel type);
+        string ToJsonString<TModel>(TModel type);
     }
 }

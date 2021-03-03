@@ -16,6 +16,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Pointwest.Test.Model.ViewModels;
 using System.Net;
+using Pointwest.Test.Dtos;
+using AutoMapper;
 
 namespace Pointwest.Test.Controllers
 {
@@ -25,19 +27,30 @@ namespace Pointwest.Test.Controllers
     {
         private readonly IApplicationService _serviceAXA;
         private ApplicationViewModel _applicationViewModel;
+        private readonly IMapper _mapper;
 
-        public ApplicationController(IApplicationService serviceAXA)
+        public ApplicationController(IApplicationService serviceAXA, IMapper mapper)
         {
             _serviceAXA = serviceAXA;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> PostRegisterAsync([FromBody] Applicant applicant)
+        public async Task<IActionResult> PostRegisterAsync([FromBody] ApplicantDto applicantDto)
         {
             try
             {
-                _applicationViewModel = await _serviceAXA.PostRegisterAsync<ApplicationViewModel, Applicant>(applicant);
-                return Ok(_applicationViewModel);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    var applicant = _mapper.Map<Applicant>(applicantDto);
+
+                    _applicationViewModel = await _serviceAXA.PostRegisterAsync<ApplicationViewModel, Applicant>(applicant);
+                    return Ok(_applicationViewModel);
+                }               
             }
             catch (Exception ex)
             {
@@ -53,8 +66,16 @@ namespace Pointwest.Test.Controllers
         {
             try
             {
-                _applicationViewModel = await _serviceAXA.PostUploadFileAsync<ApplicationViewModel, IFormFile>(fileUpload);
-                return Ok(_applicationViewModel);
+                if (fileUpload == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    _applicationViewModel = await _serviceAXA.PostUploadFileAsync<ApplicationViewModel, IFormFile>(fileUpload);
+                    return Ok(_applicationViewModel);
+                }
+
             }
             catch (Exception ex)
             {
@@ -66,12 +87,21 @@ namespace Pointwest.Test.Controllers
         }
 
         [HttpPost("schedule")]
-        public async Task<IActionResult> PostScheduleAsync([FromBody] Schedule schedule, bool isToAutomate)
+        public async Task<IActionResult> PostScheduleAsync([FromBody] ScheduleDto scheduleDto, bool isToAutomate)
         {
             try
             {
-                _applicationViewModel = await _serviceAXA.PostScheduleAsync<ApplicationViewModel, Schedule>(schedule, isToAutomate);
-                return Ok(_applicationViewModel);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    var schedule = _mapper.Map<Schedule>(scheduleDto);
+
+                    _applicationViewModel = await _serviceAXA.PostScheduleAsync<ApplicationViewModel, Schedule>(schedule, isToAutomate);
+                    return Ok(_applicationViewModel);
+                }               
             }
             catch (Exception ex)
             {

@@ -7,28 +7,23 @@ using System.Threading.Tasks;
 namespace Pointwest.Test.Model
 {
     public class Applicant
-    {
-        //[Key]
-        //public int Id { get; set; }
+    {     
+        public int Id { get; set; }
 
-        [StringLength(50)]
         [Required]
         public string Name { get; set; }
 
-        [StringLength(50)]
         [Required]
         public string Email { get; set; }
 
-        [StringLength(15)]
-        [MinLength(11)]
         [Required]
+        [MinLength(11)]
+        [MaxLength(11)]
         public string Mobile { get; set; }
 
-        [StringLength(50)]
         [Required]
         public string PositionApplied { get; set; }
 
-        [StringLength(50)]
         [Required]
         public string Source { get; set; }
     }
