@@ -55,7 +55,7 @@ namespace Pointwest.Test.Classes.Helper.Http
         }
 
         public async Task<TViewModel> PostUploadFileAsync<TViewModel, TModel>(TModel model)
-        {           
+        {
             try
             {
                 var formFile = model as IFormFile;
@@ -78,14 +78,14 @@ namespace Pointwest.Test.Classes.Helper.Http
             return (TViewModel)Convert.ChangeType(_applicationViewModel, typeof(TViewModel));
         }
 
-        public async Task<TViewModel> PostScheduleAsync<TViewModel, TModel>(TModel model)
+        public async Task<TViewModel> PostScheduleAsync<TViewModel, TModel>(TModel model, bool isToAutomate)
         {
             try
             {
                 var schedule = model as Schedule;
 
                 var httpClient = _httpClientFactory.CreateClient("addHeaderApiKey");
-                _response = await BookingProcessAsync(model, httpClient, schedule, _response);
+                _response = await BookingProcessAsync(httpClient, schedule, isToAutomate);
 
                 _applicationViewModel = await ViewModelResponseAsync(_applicationViewModel, schedule, _response);
             }
@@ -149,61 +149,34 @@ namespace Pointwest.Test.Classes.Helper.Http
             }
         }
 
-        private async Task<HttpResponseMessage> BookingProcessAsync<TModel>(TModel model, HttpClient httpClient, Schedule schedule, HttpResponseMessage responseAutomate)
+        private async Task<HttpResponseMessage> BookingProcessAsync(HttpClient httpClient, Schedule schedule, bool isToAutomate)
         {
-            var dateTimeValues = HoursMinutesExtractor(schedule);
-            var hours = dateTimeValues.Item1;
-            var minutes = dateTimeValues.Item2;
-            var meridiem = string.Empty;
+            var timeValue = TimeExtractor(schedule);
+            var hours = timeValue.Item1;
+            var minutes = timeValue.Item2;
+            var meridiem = timeValue.Item3;
+            var dateTimeToIncrement = Convert.ToDateTime($"{schedule.ProposedDate} {hours}:{minutes} {meridiem}");
+            var response = new HttpResponseMessage();
 
-            do
+            if (isToAutomate)
             {
-                for (int h = hours; h <= 24; h++)
-                {                   
-                    if (hours < 13)
-                    {
-                        meridiem = "AM";
-                    }
-                    else
-                    {
-                        meridiem = "PM";
-                        hours = h - 12;
-                    }
+                response = await AutomateProcessAsync(httpClient, schedule, dateTimeToIncrement);
+            }
+            else
+            {
+                var content = _apiContentProvider.StringContent(schedule);
+                response = await httpClient.PostAsync(_contantUtilities.ScheduleEndpoint, content);
+            }
 
-                    var incrementedMinutes = string.Empty;
-                    for (int m = minutes; m <= 60; m += 30)
-                    {
-                        incrementedMinutes = (m <= 30) ? (m < 1)
-                                                                 ? string.Empty
-                                                                 : (m < 10)
-                                                                            ? $"0{m}"
-                                                                            : m.ToString()
-                                                       : string.Empty;
-
-                        schedule.ProposedTime = $"{hours}{incrementedMinutes}{meridiem}";
-
-                        var content = _apiContentProvider.StringContent(model);
-                        responseAutomate = await httpClient.PostAsync(_contantUtilities.ScheduleEndpoint, content);
-
-                        if (responseAutomate.IsSuccessStatusCode || responseAutomate.StatusCode == HttpStatusCode.BadRequest)
-                            break;
-                    }
-
-                    if (responseAutomate.IsSuccessStatusCode || responseAutomate.StatusCode == HttpStatusCode.BadRequest)
-                        break;
-                }
-
-                if (responseAutomate.IsSuccessStatusCode || responseAutomate.StatusCode == HttpStatusCode.BadRequest)
-                    break;
-
-                schedule.ProposedDate = Convert.ToDateTime(schedule.ProposedDate).AddDays(1).ToString("yyyy-MM-dd");
-            } while (!responseAutomate.IsSuccessStatusCode);
-
-            return responseAutomate;
+            return response;
         }
 
-        private Tuple<int, int> HoursMinutesExtractor(Schedule schedule)
+        private Tuple<int, int, string> TimeExtractor(Schedule schedule)
         {
+            var time = schedule.ProposedTime;
+            var meridiemIndex = schedule.ProposedTime.IndexOf('M') - 1;
+            var meridiem = time.Substring(meridiemIndex);
+
             var proposedTime = schedule.ProposedTime;
             var digitsOnly = string.Empty;
             var hours = string.Empty;
@@ -233,7 +206,27 @@ namespace Pointwest.Test.Classes.Helper.Http
                     break;
             }
 
-            return Tuple.Create(Convert.ToInt32(hours), Convert.ToInt32(minutes));
+            return Tuple.Create(Convert.ToInt32(hours), Convert.ToInt32(minutes), meridiem);
+        }
+
+        private async Task<HttpResponseMessage> AutomateProcessAsync(HttpClient httpClient, Schedule schedule, DateTime dateTime)
+        {
+            var response = new HttpResponseMessage();
+
+            do
+            {
+                schedule.ProposedDate = dateTime.ToString("yyyy-MM-dd");
+                schedule.ProposedTime = (dateTime.Minute > 0) ? dateTime.ToString("hmmtt").ToUpper()
+                                                              : dateTime.ToString("htt").ToUpper();
+
+                var content = _apiContentProvider.StringContent(schedule);
+                response = await httpClient.PostAsync(_contantUtilities.ScheduleEndpoint, content);
+
+                dateTime = dateTime.AddMinutes(30);
+
+            } while ((!response.IsSuccessStatusCode) && (response.StatusCode != HttpStatusCode.BadRequest));
+
+            return response;
         }
     }
 }

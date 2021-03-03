@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatSlideToggleModule, MatTooltipModule } from '@angular/material';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
@@ -67,6 +67,8 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
     MaterialFileInputModule,
     ParticlesModule,
     MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: Home2Component, pathMatch: 'full' },

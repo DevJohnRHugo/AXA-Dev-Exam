@@ -1,18 +1,23 @@
+<form #f="ngForm" [formGroup]="uploadResumeFormGroup" id="formUploadResume">
 <div id="signin-container">
   <div class="login" style="display:flex; justify-content:center;">
     <div class="step-container-style">
       <div class="pt-2">
         <mat-form-field>
-          <ngx-mat-file-input placeholder="PDF file only" [accept]="'.pdf'" (change)="onFileSelected($event)"></ngx-mat-file-input>
+          <ngx-mat-file-input formControlName="resume" placeholder="PDF file only" [accept]="'.pdf'" (change)="onFileSelected($event)"></ngx-mat-file-input>
           <mat-icon matSuffix>attachment</mat-icon>
+          <mat-error *ngIf="uploadResumeFormGroup.get('resume').hasError('required')">
+            Please select a file
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="w-100">
-        <button mat-raised-button (click)="uploadResume()" class="w-100 btn-process" [hidden]="isUploadingSuccess">UPLOAD</button>
+        <button mat-raised-button [disabled]="!f.valid" (click)="uploadResume()" class="w-100 btn-process" [hidden]="isUploadingSuccess">UPLOAD</button>
         <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isUploadingSuccess">NEXT</button>
       </div>
     </div>
   </div>
 </div>
+</form>
 
 <app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>

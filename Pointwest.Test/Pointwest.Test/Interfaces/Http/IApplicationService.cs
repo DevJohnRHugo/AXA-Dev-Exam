@@ -12,7 +12,7 @@ namespace Pointwest.Test.Interfaces.Http
     public interface IApplicationService
     {
         public Task<TViewModel> PostRegisterAsync<TViewModel, TModel>(TModel model);
-        public Task<TViewModel> PostScheduleAsync<TViewModel, TModel>(TModel model);
+        public Task<TViewModel> PostScheduleAsync<TViewModel, TModel>(TModel model, bool isToAutomate);
         public Task<TViewModel> PostUploadFileAsync<TViewModel, TModel>(TModel model);
         public Task<TViewModel> ViewModelResponseAsync<TViewModel, TModel>(TViewModel viewModel, TModel model, HttpResponseMessage responseMessage);
 

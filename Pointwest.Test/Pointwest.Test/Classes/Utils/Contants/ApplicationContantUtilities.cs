@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pointwest.Test.Classes.Utilities.Contants
 {
-    public /*sealed*/ class ApplicationContantUtilities
+    public class ApplicationContantUtilities
     {
         private readonly IConfiguration _configuration;
         public readonly string AXAContentType;

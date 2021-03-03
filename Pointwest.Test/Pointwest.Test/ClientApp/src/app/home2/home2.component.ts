@@ -2,22 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, transition, useAnimation, state, style, animate } from '@angular/animations';
 import { pulse } from 'ng-animate'
 
-
-//export const fade = trigger('fade', [
-//  state('inactive', style({ opacity: 0 })),
-//  state('active', style({ opacity: 1 })),
-//  transition('* <=> *', [
-//    animate(2000)
-//  ])
-//]);
-
 @Component({
   selector: 'home',
   templateUrl: './home2.component.html',
   styleUrls: ['./home2.component.css'],
   animations: [
     trigger('pulse', [transition('* => *', useAnimation(pulse, {
-      params: { timing: 1, delay: 1 }
+      params: { timing: 1, delay: 2 }
     }))])
   ],
 })
@@ -146,7 +137,7 @@ export class Home2Component implements OnInit {
 
   width: number = 100;
   height: number = 100;
- 
+
   ngOnInit() {
   }
 

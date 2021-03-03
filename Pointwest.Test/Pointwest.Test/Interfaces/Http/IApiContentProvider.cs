@@ -10,8 +10,6 @@ namespace Pointwest.Test.Interfaces.Http
 {
     public interface IApiContentProvider
     {
-        //public StringContent StringContent(Applicant applicant);
-        //public StringContent StringContent(Schedule schedule);
         public StringContent StringContent<TModel>(TModel model);
     }
 }

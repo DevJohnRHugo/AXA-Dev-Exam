@@ -1,6 +1,7 @@
+<form #f="ngForm" [formGroup]="scheduleFormGroup" id="formSchedule">
 <div class="row step-container-style pt-2">
   <mat-form-field class="col-md-12">
-    <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date and time"
+    <input formControlName="schedule" matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date and time"
            [min]="minDate" [max]="maxDate" [disabled]="disabled" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="showSeconds"
@@ -8,9 +9,16 @@
                              [touchUi]="false" [color]="red" [enableMeridian]="true"
                              [disableMinute]="disableMinute" [hideTime]="hideTime">
     </ngx-mat-datetime-picker>
+    <mat-error *ngIf="scheduleFormGroup.get('schedule').hasError('required')">
+      Please select a schedule
+    </mat-error>
   </mat-form-field>
-  <button mat-raised-button class="col-md-12 btn-process" (click)="bookSchedule()" [hidden]="isScheduleSuccess">BOOK</button>
+  <div class="col-md-12 d-flex justify-content-end pb-3">
+    <mat-slide-toggle #automate color="primary" (change)="slideToggled(automate)">Automate booking(optional)</mat-slide-toggle>
+    <mat-icon matTooltip="this will automate booking incrementally by 30 minutes" matTooltipPosition="after"  class="pl-1">info</mat-icon>
+  </div>
+  <button [disabled]="!f.valid" mat-raised-button class="col-md-12 btn-process" (click)="bookSchedule()" [hidden]="isScheduleSuccess">BOOK</button>
   <button mat-raised-button color="primary" matStepperNext class="col-md-12" [hidden]="!isScheduleSuccess">FINISHED!</button>
 </div>
-
+</form>
 <app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>

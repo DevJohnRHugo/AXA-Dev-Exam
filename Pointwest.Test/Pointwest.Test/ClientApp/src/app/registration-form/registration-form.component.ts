@@ -10,23 +10,22 @@ import { ApplicationProcessComponent } from '../application-process/application-
   styleUrls: ['./registration-form.component.css']
 })
 export class RegistrationFormComponent implements OnInit {
-  isLinear = false;
   registrationFormGroup: FormGroup;
   isRegistrationSuccess: boolean;
   isShowSpinner: boolean;
 
-  constructor(private service: ApplicationService, private applicationProcess: ApplicationProcessComponent, private toastrService: ToastrService, private _formBuilder: FormBuilder) {
+  constructor(private service: ApplicationService, private applicationProcess: ApplicationProcessComponent, private toastrService: ToastrService, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit() {
-    this.registrationFormGroup = this._formBuilder.group({
+    this.registrationFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required, Validators.email,],
+      email: ['', [Validators.required, Validators.email]],
       mobile: ['', Validators.required],
       positionApplied: ['', Validators.required],
       source: ['', Validators.required]
-    });  
+    });
   }
 
   registerUser() {
@@ -60,7 +59,7 @@ export class RegistrationFormComponent implements OnInit {
           const parseJson = JSON.stringify(error.error)
           const errorResponse = JSON.parse(parseJson);
           this.isShowSpinner = false;
-
+          console.log(errorResponse);
           this.toastrService.error(errorResponse.message, "Error");
         });
   }

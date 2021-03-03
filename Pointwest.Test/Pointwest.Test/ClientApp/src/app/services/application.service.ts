@@ -8,7 +8,8 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class ApplicationService {
-  readonly apiUrl: string = 'https://localhost:44356/api/application/';
+  // readonly apiUrl: string = 'https://localhost:44356/api/application/';
+  readonly apiUrl: string = 'https://localhost:5001/api/application/';
     //readonly apiUrl: string = 'https://localhost:4200/api/application/';
   constructor(private http: HttpClient, private toastrService: ToastrService) {
   }
@@ -17,13 +18,14 @@ export class ApplicationService {
     return this.http.post<any>(`${this.apiUrl}register`, user);
   }
 
-  uploadFile(file: Blob) {   
+  uploadFile(file: Blob) {
     const formData = new FormData();
     formData.append('fileUpload', file);
     return this.http.post<any>(`${this.apiUrl}upload`, formData);
   }
 
-  scheduleInterview(schedule: any) {   
-    return this.http.post<any>(`${this.apiUrl}schedule`, schedule);
+  scheduleInterview(schedules: any, isToAutomate: boolean) {
+
+    return this.http.post<any>(`${this.apiUrl}schedule?isToAutomate=${isToAutomate}`, schedules/*{ schedule: schedule, isToAutomate: isToAutomate }*/);
   }
 }

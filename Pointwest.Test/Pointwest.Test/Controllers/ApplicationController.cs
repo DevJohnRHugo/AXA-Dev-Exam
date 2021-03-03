@@ -52,7 +52,7 @@ namespace Pointwest.Test.Controllers
         public async Task<IActionResult> PostUploadFileAsync(IFormFile fileUpload)
         {
             try
-            {                
+            {
                 _applicationViewModel = await _serviceAXA.PostUploadFileAsync<ApplicationViewModel, IFormFile>(fileUpload);
                 return Ok(_applicationViewModel);
             }
@@ -66,11 +66,11 @@ namespace Pointwest.Test.Controllers
         }
 
         [HttpPost("schedule")]
-        public async Task<IActionResult> PostScheduleAsync([FromBody] Schedule schedule)
+        public async Task<IActionResult> PostScheduleAsync([FromBody] Schedule schedule, bool isToAutomate)
         {
             try
             {
-                _applicationViewModel = await _serviceAXA.PostScheduleAsync<ApplicationViewModel, Schedule>(schedule);
+                _applicationViewModel = await _serviceAXA.PostScheduleAsync<ApplicationViewModel, Schedule>(schedule, isToAutomate);
                 return Ok(_applicationViewModel);
             }
             catch (Exception ex)

@@ -1,53 +1,60 @@
 <!--<mat-horizontal-stepper [linear]="isLinear" #stepper>-->
-  <!--<mat-horizontal-stepper linear>
+<!--<mat-horizontal-stepper linear>
   <mat-step [stepControl]="registrationFormGroup" [completed]="isRegistrationSuccess">-->
-    <form [formGroup]="registrationFormGroup" id="formRegister" class="step-container-style">     
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Full name" formControlName="name" required>
-        <mat-error *ngIf="registrationFormGroup.get('name').hasError('required')">
-          Field is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email"
-               placeholder="Ex. mail@gmail.com" />
-        <mat-error *ngIf="
+<form #f="ngForm" [formGroup]="registrationFormGroup" id="formRegister" class="step-container-style">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Full name" formControlName="name" required>
+    <mat-error *ngIf="registrationFormGroup.get('name').hasError('required')">
+      Field is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email" placeholder="Ex. mail@gmail.com" />
+    <mat-error *ngIf="
    registrationFormGroup.get('email').hasError('email')
    &&!registrationFormGroup.get('email').hasError('required')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="registrationFormGroup.get('email').hasError('required')">
-          Field is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Mobile number</mat-label>
-        <input matInput #mobile maxlength="11" minlength="11" placeholder="Ex. 09274862199" formControlName="mobile" type="number">
-        <mat-hint align="end">{{mobile.value.length}} / 11</mat-hint>
-        <mat-error *ngIf="registrationFormGroup.get('mobile').hasError('required')">
-          Field is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Position applied</mat-label>
-        <input matInput placeholder="Job title/position" formControlName="positionApplied" required>
-        <mat-error *ngIf="registrationFormGroup.get('positionApplied').hasError('required')">
-          Field is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Source</mat-label>
-        <input matInput placeholder="Name of agency" formControlName="source" required>
-        <mat-error *ngIf="registrationFormGroup.get('source').hasError('required')">
-          Field is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <div class="w-100 pt-3">
-        <button mat-raised-button (click)="registerUser()" class="w-100 btn-process" [hidden]="isRegistrationSuccess">REGISTER</button>
-        <button mat-raised-button matStepperNext color="primary" class="w-100" [hidden]="!isRegistrationSuccess">NEXT</button>
-      </div>
-    </form>
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="registrationFormGroup.get('email').hasError('required')">
+      Field is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-    <app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>
+  <mat-form-field class="example-full-width">
+    <mat-label>Mobile number</mat-label>
+    <input matInput #mobile maxlength="11" minlength="11" placeholder="Ex. 09274862199" formControlName="mobile"
+      type="number">
+    <mat-hint align="end">{{mobile.value.length}} / 11</mat-hint>
+    <mat-error *ngIf="registrationFormGroup.get('mobile').hasError('required')">
+      Field is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Position applied</mat-label>
+    <input matInput placeholder="Job title/position" formControlName="positionApplied" required>
+    <mat-error *ngIf="registrationFormGroup.get('positionApplied').hasError('required')">
+      Field is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Source</mat-label>
+    <input matInput placeholder="Name of agency" formControlName="source" required>
+    <mat-error *ngIf="registrationFormGroup.get('source').hasError('required')">
+      Field is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="w-100 pt-3">
+    <button mat-raised-button (click)="registerUser()" class="w-100 btn-process" [hidden]="isRegistrationSuccess"
+      [disabled]="!f.valid">REGISTER</button>
+    <button mat-raised-button matStepperNext color="primary" class="w-100"
+      [hidden]="!isRegistrationSuccess">NEXT</button>
+  </div>
+</form>
+
+<app-progress-spinner [showSpinner]="isShowSpinner"></app-progress-spinner>
